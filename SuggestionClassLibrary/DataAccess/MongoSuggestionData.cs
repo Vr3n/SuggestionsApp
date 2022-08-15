@@ -61,6 +61,8 @@ public class MongoSuggestionData : ISuggestionData
 
         using var session = await client.StartSessionAsync();
 
+        session.StartTransaction();
+
         try
         {
             var db = client.GetDatabase(_db.DbName);
