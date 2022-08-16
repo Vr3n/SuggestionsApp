@@ -1,6 +1,7 @@
-﻿/// Add Dependency injections in Programs.cs
+﻿
+using Auth0.AspNetCore.Authentication;
+/// Add Dependency injections in Programs.cs
 ///
-
 namespace SuggestionsAppUI;
 
 public static class RegisterServices
@@ -11,6 +12,14 @@ public static class RegisterServices
         builder.Services.AddRazorPages();
         builder.Services.AddServerSideBlazor();
         builder.Services.AddMemoryCache();
+
+        // Auth0 Service.
+        builder.Services.AddAuth0WebAppAuthentication(options =>
+        {
+            options.Domain = builder.Configuration["Auth0:Domain"];
+            options.ClientId = builder.Configuration["Auth0:ClientId"];
+            options.ClientSecret = builder.Configuration["Auth0:ClientSecret"];
+        });
 
         // Adding Database.
         builder.Services.AddSingleton<IDbConnection, DbConnection>();

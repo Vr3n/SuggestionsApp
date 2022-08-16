@@ -23,6 +23,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// For Auh.
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
